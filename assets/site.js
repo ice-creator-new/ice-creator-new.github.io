@@ -12,7 +12,7 @@
       scrollTrigger: {
         start: 0,
         end: "max",
-        scrub: 0.2,
+        scrub: 0.35,
       },
     });
 
@@ -21,44 +21,61 @@
         trigger: ".hero",
         start: "top top",
         end: "bottom top",
-        scrub: true,
+        scrub: 0.8,
       },
     });
 
     heroTl
-      .to(".hero-grid", { yPercent: -18, ease: "none" }, 0)
-      .to(".shard-a", { yPercent: -28, ease: "none" }, 0)
-      .to(".shard-b", { yPercent: -52, ease: "none" }, 0)
-      .to(".shard-c", { yPercent: -76, ease: "none" }, 0)
-      .to(".hero-title", { y: -64, scale: 0.9, ease: "none" }, 0)
-      .to(".hero-copy", { y: -96, opacity: 0.2, ease: "none" }, 0);
+      .to(".layer-far", { yPercent: -14, scale: 1.08, ease: "none" }, 0)
+      .to(".layer-mid", { yPercent: -32, ease: "none" }, 0)
+      .to(".layer-near", { yPercent: -58, xPercent: 6, ease: "none" }, 0)
+      .to(".hero-title", { y: -90, scale: 0.84, ease: "none" }, 0)
+      .to(".hero-copy", { y: -140, opacity: 0, ease: "none" }, 0)
+      .to(".hero-veil", { opacity: 0.82, ease: "none" }, 0);
+
+    gsap.fromTo(
+      ".statement-bg img",
+      { yPercent: -8, scale: 1.12 },
+      {
+        yPercent: 12,
+        scale: 1.02,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".statement",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 0.7,
+        },
+      },
+    );
 
     gsap.to(".word", {
       color: "var(--fg)",
-      stagger: 0.12,
+      stagger: 0.14,
       ease: "none",
       scrollTrigger: {
         trigger: ".statement",
-        start: "top 78%",
-        end: "center 42%",
+        start: "top 75%",
+        end: "center 40%",
         scrub: true,
       },
     });
 
-    gsap.utils.toArray(".work-card").forEach((card) => {
-      const visual = card.querySelector(".work-visual");
+    gsap.utils.toArray(".parallax-frame").forEach((frame) => {
+      const visual = frame.querySelector(".parallax-media");
       if (!visual) return;
       gsap.fromTo(
         visual,
-        { yPercent: 14 },
+        { yPercent: -8, scale: 1.22 },
         {
-          yPercent: -12,
+          yPercent: 14,
+          scale: 1.05,
           ease: "none",
           scrollTrigger: {
-            trigger: card,
+            trigger: frame,
             start: "top bottom",
             end: "bottom top",
-            scrub: true,
+            scrub: 0.65,
           },
         },
       );
@@ -69,7 +86,7 @@
     ScrollTrigger.create({
       trigger: ".statement",
       start: "top top",
-      end: "+=65%",
+      end: "+=90%",
       pin: true,
       pinSpacing: true,
     });

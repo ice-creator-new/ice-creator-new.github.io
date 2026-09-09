@@ -28,9 +28,9 @@
     <header class="site-header">
       <a class="mark" href="#top">ICE</a>
       <nav>
-        <a href="#work">Work</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
+        <a href="#work">作品</a>
+        <a href="#about">关于</a>
+        <a href="#contact">联系</a>
         <a
           class="icon-link"
           href="https://github.com/ice-creator-new"
@@ -50,12 +50,12 @@
     <main>
       <section id="top" class="hero">
         <div class="hero-pin">
-          <div class="hero-grid" aria-hidden="true"></div>
-          <div class="shard shard-a" aria-hidden="true"></div>
-          <div class="shard shard-b" aria-hidden="true"></div>
-          <div class="shard shard-c" aria-hidden="true"></div>
+          <img class="parallax-layer layer-far" src="./media/hero-far.jpg" alt="" width="1920" height="1080" />
+          <img class="parallax-layer layer-mid" src="./media/hero-mid.jpg" alt="" width="1920" height="1080" />
+          <img class="parallax-layer layer-near" src="./media/hero-near.jpg" alt="" width="1920" height="1080" />
+          <div class="hero-veil" aria-hidden="true"></div>
           <div class="hero-inner">
-            <p class="hero-copy kicker">01 — Intro</p>
+            <p class="hero-copy kicker">01 — 开场</p>
             <h1 class="hero-title">ICE</h1>
             <div class="hero-copy hero-meta">
               <p class="lede">独立开发者。正在建造界面、工具，以及安静的系统。</p>
@@ -63,7 +63,7 @@
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path d="M12 5v14M19 12l-7 7-7-7" />
                 </svg>
-                Scroll
+                下滑
               </p>
             </div>
           </div>
@@ -71,8 +71,11 @@
       </section>
 
       <section class="statement">
+        <div class="statement-bg" aria-hidden="true">
+          <img src="./media/hero-far.jpg" alt="" width="1920" height="1080" />
+        </div>
         <div class="statement-inner">
-          <p class="kicker">02 — Now</p>
+          <p class="kicker">02 — 此刻</p>
           <h2>
             <span class="word">我做界面、工具，</span>
             <span class="word">以及安静的系统。</span>
@@ -85,15 +88,22 @@
       <section id="work" class="work">
         <div class="section-head">
           <div>
-            <p class="kicker">03 — Work</p>
+            <p class="kicker">03 — 作品</p>
             <h2 class="section-title">作品占位</h2>
           </div>
           <p class="aside">先用三张卡片把节奏立住。标题、年份、说明之后都可以换。</p>
         </div>
 
         <article class="work-card">
-          <div class="work-frame">
-            <div class="work-visual visual-atlas" aria-hidden="true"></div>
+          <div class="parallax-frame">
+            <img
+              class="parallax-media"
+              src="./media/work-atlas.jpg"
+              alt="白色建筑模型置于深色工作台上"
+              width="1400"
+              height="1050"
+              loading="lazy"
+            />
           </div>
           <div class="work-copy">
             <p class="meta">01 / 2026</p>
@@ -104,8 +114,15 @@
         </article>
 
         <article class="work-card">
-          <div class="work-frame">
-            <div class="work-visual visual-notes" aria-hidden="true"></div>
+          <div class="parallax-frame">
+            <img
+              class="parallax-media"
+              src="./media/work-notes.jpg"
+              alt="夜色书桌上一本摊开的笔记"
+              width="1400"
+              height="1050"
+              loading="lazy"
+            />
           </div>
           <div class="work-copy">
             <p class="meta">02 / 2026</p>
@@ -116,8 +133,15 @@
         </article>
 
         <article class="work-card">
-          <div class="work-frame">
-            <div class="work-visual visual-signal" aria-hidden="true"></div>
+          <div class="parallax-frame">
+            <img
+              class="parallax-media"
+              src="./media/work-signal.jpg"
+              alt="雾中的一道冷光"
+              width="1400"
+              height="1050"
+              loading="lazy"
+            />
           </div>
           <div class="work-copy">
             <p class="meta">03 / 2026</p>
@@ -129,18 +153,28 @@
       </section>
 
       <section id="about" class="about">
-        <p class="kicker">04 — About</p>
-        <div>
+        <p class="kicker">04 — 关于</p>
+        <div class="about-title">
           <h2 class="display">Ice <em>·</em> 占位介绍</h2>
-          <p class="lede">
-            这里是个人主页的占位文案。之后可以换成你的经历、正在做的事，以及你关心的问题。
-          </p>
+        </div>
+        <div class="parallax-frame">
+          <img
+            class="parallax-media"
+            src="./media/about-studio.jpg"
+            alt="夜里空着的工作室，窗外是冰原"
+            width="1600"
+            height="1067"
+            loading="lazy"
+          />
+        </div>
+        <div class="about-copy">
+          <p class="lede">这里是个人主页的占位文案。之后可以换成你的经历、正在做的事，以及你关心的问题。</p>
           <p class="body">This page is a scaffold. Swap the copy, plug in real work, keep the motion.</p>
         </div>
       </section>
 
       <section id="contact" class="contact">
-        <p class="kicker">05 — Contact</p>
+        <p class="kicker">05 — 联系</p>
         <h2 class="display">保持联系</h2>
         <p class="body">邮箱与社交链接也先占位。GitHub 已经接上。</p>
         <a class="contact-link" href="mailto:hello@example.com">

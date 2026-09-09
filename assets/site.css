@@ -12,8 +12,6 @@
   --text-hero: clamp(5rem, 18vw, 13.5rem);
   --text-display: clamp(2rem, 4.6vw, 3.75rem);
   --text-lede: clamp(1.125rem, 2vw, 1.5rem);
-  --space-5: 24px;
-  --space-8: 64px;
 }
 
 * {
@@ -55,12 +53,16 @@ p {
   text-wrap: pretty;
 }
 
+img {
+  max-width: none;
+}
+
 .site-grain {
   position: fixed;
   inset: 0;
   z-index: 40;
   pointer-events: none;
-  opacity: 0.045;
+  opacity: 0.05;
   mix-blend-mode: overlay;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
 }
@@ -97,14 +99,14 @@ p {
 nav {
   display: flex;
   align-items: center;
-  gap: 4px;
+  gap: 2px;
 }
 
 nav a {
   display: inline-flex;
   align-items: center;
   min-height: 44px;
-  padding: 0 12px;
+  padding: 0 10px;
   font-size: 0.875rem;
   color: var(--muted);
   transition: color 150ms ease;
@@ -124,72 +126,66 @@ nav a:hover,
 
 .hero {
   position: relative;
-  height: 165vh;
+  height: 230vh;
 }
 
 .hero-pin {
   position: sticky;
   top: 0;
-  display: flex;
-  align-items: flex-end;
   height: 100dvh;
   overflow: hidden;
 }
 
-.hero-grid {
+.parallax-layer {
   position: absolute;
-  inset: 0;
+  left: 0;
+  width: 100%;
+  object-fit: cover;
   pointer-events: none;
-  background-image:
-    linear-gradient(color-mix(in oklab, var(--fg) 7%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in oklab, var(--fg) 7%, transparent) 1px, transparent 1px);
-  background-size: 72px 72px;
-  mask-image: radial-gradient(ellipse at center, black 18%, transparent 72%);
-}
-
-.shard {
-  position: absolute;
-  border: 1px solid color-mix(in oklab, var(--fg) 14%, transparent);
-  background: linear-gradient(
-    155deg,
-    color-mix(in oklab, var(--accent) 18%, transparent),
-    color-mix(in oklab, var(--accent) 3%, transparent)
-  );
   will-change: transform;
 }
 
-.shard-a {
-  width: min(42vw, 420px);
-  height: min(58vw, 560px);
-  left: -6%;
-  top: 12%;
-  clip-path: polygon(18% 0%, 100% 12%, 82% 100%, 0% 86%);
+.layer-far {
+  top: -12%;
+  height: 130%;
+  object-position: center 40%;
 }
 
-.shard-b {
-  width: min(36vw, 360px);
-  height: min(48vw, 480px);
-  right: 4%;
-  top: 22%;
-  clip-path: polygon(0% 16%, 88% 0%, 100% 78%, 12% 100%);
-  opacity: 0.75;
+.layer-mid {
+  top: -8%;
+  height: 128%;
+  opacity: 0.55;
+  mix-blend-mode: screen;
+  mask-image: linear-gradient(to top, transparent 8%, black 42%, black 78%, transparent 100%);
 }
 
-.shard-c {
-  width: min(28vw, 280px);
-  height: min(28vw, 280px);
-  right: 22%;
-  bottom: 8%;
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+.layer-near {
+  top: auto;
+  bottom: -18%;
+  height: 78%;
+  object-position: center 70%;
+  mask-image: linear-gradient(to top, black 0%, black 38%, transparent 78%);
+}
+
+.hero-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(to top, var(--bg) 0%, transparent 42%),
+    linear-gradient(to bottom, color-mix(in oklab, var(--bg) 55%, transparent) 0%, transparent 28%);
   opacity: 0.55;
 }
 
 .hero-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   width: 100%;
+  height: 100%;
   flex-direction: column;
+  justify-content: flex-end;
   gap: 32px;
   padding: 0 20px 40px;
 }
@@ -199,6 +195,7 @@ nav a:hover,
   font-size: var(--text-hero);
   line-height: 0.82;
   letter-spacing: -0.045em;
+  text-shadow: 0 18px 60px color-mix(in oklab, var(--bg) 70%, transparent);
   will-change: transform;
 }
 
@@ -236,10 +233,41 @@ nav a:hover,
   display: flex;
   min-height: 100dvh;
   align-items: center;
+  overflow: hidden;
   padding: 96px 20px;
 }
 
+.statement-bg {
+  position: absolute;
+  inset: -18% 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.statement-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.28;
+  will-change: transform;
+}
+
+.statement::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    var(--bg),
+    color-mix(in oklab, var(--bg) 55%, transparent) 40%,
+    var(--bg)
+  );
+  pointer-events: none;
+}
+
 .statement-inner {
+  position: relative;
+  z-index: 1;
   max-width: 64rem;
   margin: 0 auto;
 }
@@ -304,68 +332,21 @@ nav a:hover,
   gap: 24px;
 }
 
-.work-frame {
+.parallax-frame {
   overflow: hidden;
   border-radius: 20px;
+  min-height: 16rem;
 }
 
-.work-visual {
-  position: relative;
-  height: 16rem;
+.parallax-media {
+  display: block;
+  width: 100%;
+  height: 140%;
+  min-height: 22rem;
+  object-fit: cover;
   will-change: transform;
-}
-
-.visual-atlas {
-  background:
-    linear-gradient(135deg, color-mix(in oklab, var(--accent) 16%, transparent), transparent 62%),
-    repeating-linear-gradient(
-      90deg,
-      color-mix(in oklab, var(--fg) 8%, transparent) 0 1px,
-      transparent 1px 48px
-    ),
-    var(--surface);
-}
-
-.visual-atlas::after {
-  content: "";
-  position: absolute;
-  inset: 18% 22% auto auto;
-  width: 42%;
-  height: 58%;
-  border: 1px solid color-mix(in oklab, var(--fg) 22%, transparent);
-  background: color-mix(in oklab, var(--accent) 10%, transparent);
-}
-
-.visual-notes {
-  background:
-    radial-gradient(circle at 30% 40%, color-mix(in oklab, var(--accent) 22%, transparent), transparent 42%),
-    var(--surface);
-}
-
-.visual-notes::before,
-.visual-notes::after {
-  content: "";
-  position: absolute;
-  border: 1px solid color-mix(in oklab, var(--fg) 18%, transparent);
-  border-radius: 999px;
-}
-
-.visual-notes::before {
-  inset: 16%;
-}
-
-.visual-notes::after {
-  inset: 30%;
-}
-
-.visual-signal {
-  background:
-    repeating-linear-gradient(
-      -28deg,
-      color-mix(in oklab, var(--accent) 14%, transparent) 0 18px,
-      transparent 18px 48px
-    ),
-    var(--surface);
+  outline: 1px solid color-mix(in oklab, var(--fg) 10%, transparent);
+  outline-offset: -1px;
 }
 
 .work-copy {
@@ -412,9 +393,9 @@ nav a:hover,
   color: var(--muted);
 }
 
-.about .lede,
-.about .body {
-  margin-top: 28px;
+.about-copy .lede,
+.about-copy .body {
+  margin-top: 20px;
   max-width: 36rem;
 }
 
@@ -477,11 +458,8 @@ footer .mark {
     padding-right: 32px;
   }
 
-  .hero-pin {
-    align-items: center;
-  }
-
   .hero-inner {
+    justify-content: center;
     padding-bottom: 0;
   }
 
@@ -501,12 +479,13 @@ footer .mark {
     gap: 40px;
   }
 
-  .work-frame {
+  .work-card .parallax-frame {
     grid-column: span 7;
+    min-height: 28rem;
   }
 
-  .work-visual {
-    height: 28rem;
+  .parallax-media {
+    min-height: 32rem;
   }
 
   .work-copy {
@@ -517,28 +496,41 @@ footer .mark {
 
   .about {
     grid-template-columns: repeat(12, 1fr);
+    align-items: end;
   }
 
   .about .kicker {
     grid-column: span 4;
   }
 
-  .about > div {
+  .about-title {
     grid-column: span 8;
+  }
+
+  .about .parallax-frame {
+    grid-column: span 7;
+  }
+
+  .about-copy {
+    grid-column: span 5;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .progress-bar,
-  .shard,
-  .hero-grid,
+  .parallax-layer,
   .hero-title,
   .hero-copy,
-  .work-visual {
+  .parallax-media,
+  .statement-bg img {
     transform: none !important;
   }
 
   .word {
     color: var(--fg);
+  }
+
+  .layer-mid {
+    opacity: 0.35;
   }
 }
