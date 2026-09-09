@@ -138,33 +138,33 @@ nav a:hover,
 
 .parallax-layer {
   position: absolute;
-  left: 0;
-  width: 100%;
+  left: -22%;
+  width: 144%;
   object-fit: cover;
   pointer-events: none;
   will-change: transform;
 }
 
 .layer-far {
-  top: -12%;
-  height: 130%;
-  object-position: center 40%;
+  top: -22%;
+  height: 150%;
+  object-position: center 42%;
 }
 
 .layer-mid {
-  top: -8%;
-  height: 128%;
-  opacity: 0.55;
+  top: -18%;
+  height: 148%;
+  opacity: 0.5;
   mix-blend-mode: screen;
-  mask-image: linear-gradient(to top, transparent 8%, black 42%, black 78%, transparent 100%);
+  mask-image: radial-gradient(ellipse 70% 62% at 50% 48%, black 28%, transparent 78%);
 }
 
 .layer-near {
   top: auto;
-  bottom: -18%;
-  height: 78%;
-  object-position: center 70%;
-  mask-image: linear-gradient(to top, black 0%, black 38%, transparent 78%);
+  bottom: -28%;
+  height: 92%;
+  object-position: center 78%;
+  mask-image: linear-gradient(to top, black 0%, black 28%, transparent 72%);
 }
 
 .hero-veil {
@@ -239,14 +239,14 @@ nav a:hover,
 
 .statement-bg {
   position: absolute;
-  inset: -18% 0;
+  inset: -22% -12%;
   z-index: 0;
   overflow: hidden;
 }
 
 .statement-bg img {
   width: 100%;
-  height: 100%;
+  height: 130%;
   object-fit: cover;
   opacity: 0.28;
   will-change: transform;
@@ -333,20 +333,26 @@ nav a:hover,
 }
 
 .parallax-frame {
+  position: relative;
   overflow: hidden;
   border-radius: 20px;
   min-height: 16rem;
+  height: 16rem;
+  transform: translateZ(0);
+  isolation: isolate;
+  -webkit-mask-image: radial-gradient(#fff, #fff);
+  mask-image: radial-gradient(#fff, #fff);
+  box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--fg) 10%, transparent);
 }
 
 .parallax-media {
+  position: absolute;
+  inset: -22% 0 auto;
   display: block;
   width: 100%;
-  height: 140%;
-  min-height: 22rem;
+  height: 150%;
   object-fit: cover;
   will-change: transform;
-  outline: 1px solid color-mix(in oklab, var(--fg) 10%, transparent);
-  outline-offset: -1px;
 }
 
 .work-copy {
@@ -482,10 +488,11 @@ footer .mark {
   .work-card .parallax-frame {
     grid-column: span 7;
     min-height: 28rem;
+    height: 28rem;
   }
 
   .parallax-media {
-    min-height: 32rem;
+    min-height: 0;
   }
 
   .work-copy {
@@ -509,6 +516,8 @@ footer .mark {
 
   .about .parallax-frame {
     grid-column: span 7;
+    min-height: 28rem;
+    height: 28rem;
   }
 
   .about-copy {

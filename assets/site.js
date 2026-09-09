@@ -26,9 +26,9 @@
     });
 
     heroTl
-      .to(".layer-far", { yPercent: -14, scale: 1.08, ease: "none" }, 0)
-      .to(".layer-mid", { yPercent: -32, ease: "none" }, 0)
-      .to(".layer-near", { yPercent: -58, xPercent: 6, ease: "none" }, 0)
+      .to(".layer-far", { yPercent: -12, scale: 1.06, ease: "none" }, 0)
+      .to(".layer-mid", { yPercent: -26, ease: "none" }, 0)
+      .to(".layer-near", { yPercent: -42, ease: "none" }, 0)
       .to(".hero-title", { y: -90, scale: 0.84, ease: "none" }, 0)
       .to(".hero-copy", { y: -140, opacity: 0, ease: "none" }, 0)
       .to(".hero-veil", { opacity: 0.82, ease: "none" }, 0);
@@ -66,10 +66,9 @@
       if (!visual) return;
       gsap.fromTo(
         visual,
-        { yPercent: -8, scale: 1.22 },
+        { yPercent: -6 },
         {
-          yPercent: 14,
-          scale: 1.05,
+          yPercent: 12,
           ease: "none",
           scrollTrigger: {
             trigger: frame,
