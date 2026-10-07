@@ -60,18 +60,19 @@ p {
   text-wrap: pretty;
 }
 
-/* —— Nav —— */
+/* —— Nav —— full-viewport frosted bar; links keep gutter padding —— */
 .nav {
   position: sticky;
   top: 0;
   z-index: 50;
+  width: 100%;
+  max-width: none;
+  margin: 0;
   height: var(--nav-height);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 var(--grid-gutter);
-  max-width: calc(var(--grid-max) + 2 * var(--grid-gutter));
-  margin: 0 auto;
+  padding: 0 max(var(--grid-gutter), calc((100vw - var(--grid-max)) / 2));
   background: var(--color-glass);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -234,7 +235,8 @@ section {
 @media (min-width: 1024px) {
   body[data-track="3d"] section {
     padding: var(--section-pad-y) 0;
-    min-height: 70vh;
+    /* ~4×100vh scroll room for camera keyframes */
+    min-height: calc(100vh - var(--nav-height));
   }
 }
 
@@ -247,7 +249,7 @@ section {
   margin: 0 0 var(--space-4);
 }
 
-/* —— Hero letter choreography —— */
+/* —— Hero letter choreography (letter track; reduce / 3d → .is-lit) —— */
 .hero-title {
   font-family: var(--font-display);
   font-size: var(--text-hero);
@@ -262,22 +264,41 @@ section {
 
 .hero-title .ch {
   display: inline-block;
+}
+
+/* 3D track / JS final: static title */
+body[data-track="3d"] .hero-title .ch,
+body[data-track="3d"] .hero-lead,
+.hero-title.is-lit .ch,
+.hero-lead.is-lit {
+  opacity: 1;
+  transform: none;
+  animation: none;
+}
+
+/* Letter track: CSS stagger on load (no wait for module) */
+body[data-track="letter"] .hero-title:not(.is-lit) .ch {
   opacity: 0;
   transform: translateY(0.35em);
   animation: letterIn var(--dur-hero-letter) var(--ease-out) forwards;
 }
 
-.hero-title .ch:nth-child(1) {
+body[data-track="letter"] .hero-title:not(.is-lit) .ch:nth-child(1) {
   animation-delay: calc(var(--stagger-letter) * 0);
 }
-.hero-title .ch:nth-child(2) {
+body[data-track="letter"] .hero-title:not(.is-lit) .ch:nth-child(2) {
   animation-delay: calc(var(--stagger-letter) * 1);
 }
-.hero-title .ch:nth-child(3) {
+body[data-track="letter"] .hero-title:not(.is-lit) .ch:nth-child(3) {
   animation-delay: calc(var(--stagger-letter) * 2);
 }
 
+
 @keyframes letterIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.35em);
+  }
   to {
     opacity: 1;
     transform: translateY(0);
@@ -290,10 +311,15 @@ section {
   max-width: 36ch;
   margin: 0;
   line-height: var(--leading-snug);
+}
+
+body[data-track="letter"] .hero-lead:not(.is-lit) {
   opacity: 0;
+  transform: translateY(12px);
   animation: lineIn var(--dur-slow) var(--ease-out) forwards;
   animation-delay: calc(var(--stagger-letter) * 3 + var(--stagger-line));
 }
+
 
 @keyframes lineIn {
   from {
@@ -307,14 +333,11 @@ section {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-title .ch {
-    opacity: 1;
-    transform: none;
-    animation: none;
-  }
-  .hero-lead {
-    opacity: 1;
-    animation: none;
+  body[data-track="letter"] .hero-title .ch,
+  body[data-track="letter"] .hero-lead {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
   }
 }
 
