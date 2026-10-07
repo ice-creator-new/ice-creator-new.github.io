@@ -1,0 +1,110 @@
+/**
+ * Ice · GitHub Pages 个人主页
+ * Design tokens — 深色「安静的系统」
+ * 工程可直接 @import 或拷贝到站点 CSS。
+ */
+
+:root {
+  /* ——— Color: surfaces ——— */
+  --color-bg: #0b0d10;
+  --color-bg-elevated: #12151a;
+  --color-bg-soft: #181c22;
+  --color-surface: #1a1f27;
+  --color-surface-hover: #222833;
+  --color-glass: rgba(26, 31, 39, 0.72);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+
+  /* ——— Color: text ——— */
+  --color-text: #e8eaed;
+  --color-text-secondary: #9aa3b2;
+  --color-text-muted: #6b7380;
+  --color-text-inverse: #0b0d10;
+
+  /* ——— Color: accent (冷青，一点强调) ——— */
+  --color-accent: #5eead4;
+  --color-accent-soft: rgba(94, 234, 212, 0.14);
+  --color-accent-border: rgba(94, 234, 212, 0.35);
+  --color-accent-dim: #2dd4bf;
+
+  /* ——— Color: line / focus ——— */
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.16);
+  --color-focus-ring: #5eead4;
+  --color-danger: #f87171;
+
+  /* ——— Color: 3D canvas scaffolding ——— */
+  --color-canvas-fallback: #0e1116;
+  --color-canvas-grid: rgba(94, 234, 212, 0.06);
+
+  /* ——— Spacing scale (4-base) ——— */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ——— Layout ——— */
+  --grid-max: 1120px;
+  --grid-gutter: 24px;
+  --grid-gutter-lg: 32px;
+  --section-pad-y: 96px;
+  --section-pad-y-sm: 64px;
+  --nav-height: 56px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  /* ——— Typography ——— */
+  --font-sans: "Inter", "SF Pro Text", "PingFang SC", "Noto Sans SC",
+    system-ui, -apple-system, sans-serif;
+  --font-display: "Inter", "SF Pro Display", "PingFang SC", "Noto Sans SC",
+    system-ui, -apple-system, sans-serif;
+  --font-mono: "SF Mono", "JetBrains Mono", "Menlo", ui-monospace, monospace;
+
+  --text-xs: 0.75rem;    /* 12 */
+  --text-sm: 0.875rem;   /* 14 */
+  --text-base: 1rem;     /* 16 */
+  --text-md: 1.125rem;   /* 18 */
+  --text-lg: 1.25rem;    /* 20 */
+  --text-xl: 1.5rem;     /* 24 */
+  --text-2xl: 2rem;      /* 32 */
+  --text-3xl: 2.75rem;   /* 44 */
+  --text-hero: clamp(2.75rem, 6vw, 4.5rem); /* ~44–72 */
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.55;
+  --tracking-tight: -0.02em;
+  --tracking-wide: 0.08em;
+
+  /* ——— Motion (desktop full / letter-choreography defaults) ——— */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur-base: 280ms;
+  --dur-slow: 480ms;
+  --dur-hero-letter: 620ms;
+  --stagger-letter: 48ms;
+  --stagger-line: 90ms;
+
+  /* ——— Breakpoints (文档用；CSS 用媒体查询) ——— */
+  /* desktop-3d: min-width 1024px */
+  /* mobile-letter: max-width 1023px */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 0ms;
+    --dur-base: 0ms;
+    --dur-slow: 0ms;
+    --dur-hero-letter: 0ms;
+    --stagger-letter: 0ms;
+    --stagger-line: 0ms;
+  }
+}

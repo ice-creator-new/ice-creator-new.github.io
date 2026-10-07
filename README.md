@@ -1,17 +1,43 @@
 # ICE
 
-Personal homepage, published as a GitHub Pages user site.
+Personal homepage — GitHub Pages user site.
 
 **Live:** https://ice-creator-new.github.io
 
-ScrollTrigger drives the parallax: layered shards in the hero, a pinned statement, and work-card visuals that drift at a different speed from the copy. Body copy is placeholder — swap it when you have the real words.
+## Architecture (2026-10 redesign)
+
+Direction **6 desktop + 1 mobile** (see design spec):
+
+| Track | When | Behavior |
+| --- | --- | --- |
+| Desktop 3D | ≥1024px, no `prefers-reduced-motion`, WebGL OK | Sticky Three.js canvas; scroll drives camera keyframes |
+| Letter | Mobile / reduced-motion / WebGL fail | No Three.js download; Hero `ICE` letter choreography |
+
+- `assets/tokens.css` — design tokens (color, space, type, motion)
+- `assets/site.css` — layout & components
+- `assets/site.js` — track detection + nav; **dynamic-imports** `stage3d.js` only on 3D track
+- `assets/stage3d.js` — Three.js stage (CDN ES module); procedural placeholder; set `MODEL_URL` for a real glTF
+
+Blog site (icesniper.vercel.app) is separate and untouched.
 
 ## Edit
 
 | File | What to change |
 | --- | --- |
-| `index.html` | Name, bio, work titles, contact |
-| `assets/site.css` | Color, type, layout |
-| `assets/site.js` | ScrollTrigger timelines |
+| `index.html` | Copy, links, featured cards |
+| `assets/tokens.css` | Palette / spacing |
+| `assets/site.css` | Layout |
+| `assets/stage3d.js` | Camera keyframes, `MODEL_URL` |
 
-GitHub Pages serves this repo from the `main` branch root. After a push, the site usually updates within a minute.
+## Preview
+
+Serve the repo root over HTTP (ES modules need a server):
+
+```bash
+npx --yes serve -l 4173 .
+# open http://localhost:4173
+```
+
+Desktop: width ≥1024. Mobile / reduce: DevTools device mode or OS “Reduce motion”.
+
+GitHub Pages serves `main` from the repo root.

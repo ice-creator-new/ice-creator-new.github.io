@@ -1,93 +1,108 @@
-(() => {
-  if (typeof gsap === "undefined" || typeof ScrollTrigger === "undefined") return;
+/**
+ * Ice · GH Pages entry
+ * Dual-track: desktop 3D (lazy Three) vs letter choreography.
+ */
 
-  gsap.registerPlugin(ScrollTrigger);
+const DESKTOP_MQ = "(min-width: 1024px)";
+const REDUCE_MQ = "(prefers-reduced-motion: reduce)";
 
-  const mm = gsap.matchMedia();
+let stageHandle = null;
+let mounting = false;
 
-  mm.add("(prefers-reduced-motion: no-preference)", () => {
-    gsap.to(".progress-bar", {
-      scaleX: 1,
-      ease: "none",
-      scrollTrigger: {
-        start: 0,
-        end: "max",
-        scrub: 0.35,
-      },
-    });
-
-    const heroTl = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".hero",
-        start: "top top",
-        end: "bottom top",
-        scrub: 0.8,
-      },
-    });
-
-    heroTl
-      .to(".layer-far", { yPercent: -12, scale: 1.06, ease: "none" }, 0)
-      .to(".layer-mid", { yPercent: -26, ease: "none" }, 0)
-      .to(".layer-near", { yPercent: -42, ease: "none" }, 0)
-      .to(".hero-title", { y: -90, scale: 0.84, ease: "none" }, 0)
-      .to(".hero-copy", { y: -140, opacity: 0, ease: "none" }, 0)
-      .to(".hero-veil", { opacity: 0.82, ease: "none" }, 0);
-
-    gsap.fromTo(
-      ".statement-bg img",
-      { yPercent: -8, scale: 1.12 },
-      {
-        yPercent: 12,
-        scale: 1.02,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".statement",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 0.7,
-        },
-      },
+function hasWebGL() {
+  try {
+    const canvas = document.createElement("canvas");
+    return !!(
+      canvas.getContext("webgl") ||
+      canvas.getContext("experimental-webgl")
     );
+  } catch {
+    return false;
+  }
+}
 
-    gsap.to(".word", {
-      color: "var(--fg)",
-      stagger: 0.14,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ".statement",
-        start: "top 75%",
-        end: "center 40%",
-        scrub: true,
-      },
-    });
+function canUse3D() {
+  return (
+    window.matchMedia(DESKTOP_MQ).matches &&
+    !window.matchMedia(REDUCE_MQ).matches &&
+    hasWebGL()
+  );
+}
 
-    gsap.utils.toArray(".parallax-frame").forEach((frame) => {
-      const visual = frame.querySelector(".parallax-media");
-      if (!visual) return;
-      gsap.fromTo(
-        visual,
-        { yPercent: -6 },
-        {
-          yPercent: 12,
-          ease: "none",
-          scrollTrigger: {
-            trigger: frame,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 0.65,
-          },
-        },
-      );
-    });
-  });
+function setTrack(track) {
+  document.body.dataset.track = track;
+}
 
-  mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
-    ScrollTrigger.create({
-      trigger: ".statement",
-      start: "top top",
-      end: "+=90%",
-      pin: true,
-      pinSpacing: true,
+function setupNavActive() {
+  const sections = ["hero", "featured", "about", "contact"]
+    .map((id) => document.getElementById(id))
+    .filter(Boolean);
+  const links = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+
+  const update = () => {
+    const y = window.scrollY + window.innerHeight * 0.35;
+    let current = sections[0]?.id ?? "hero";
+    for (const section of sections) {
+      if (section.offsetTop <= y) current = section.id;
+    }
+    for (const link of links) {
+      const href = link.getAttribute("href")?.slice(1);
+      link.classList.toggle("is-active", href === current);
+    }
+  };
+
+  window.addEventListener("scroll", update, { passive: true });
+  update();
+}
+
+async function ensure3D() {
+  if (stageHandle || mounting) return;
+  mounting = true;
+  try {
+    const mod = await import("./stage3d.js");
+    stageHandle = await mod.mountStage({
+      canvas: document.getElementById("stage-canvas"),
+      stage: document.getElementById("stage"),
+      sectionIds: ["hero", "featured", "about", "contact"],
     });
-  });
-})();
+  } catch (err) {
+    console.warn("[ice] 3D stage failed, falling back to letter track", err);
+    setTrack("letter");
+    const stage = document.getElementById("stage");
+    if (stage) {
+      stage.classList.remove("is-ready");
+      stage.dataset.mounted = "0";
+    }
+    stageHandle = null;
+  } finally {
+    mounting = false;
+  }
+}
+
+function teardown3D() {
+  if (stageHandle?.teardown) {
+    stageHandle.teardown();
+  }
+  stageHandle = null;
+  const stage = document.getElementById("stage");
+  if (stage) {
+    stage.classList.remove("is-ready");
+    stage.dataset.mounted = "0";
+  }
+}
+
+async function applyTrack() {
+  if (canUse3D()) {
+    setTrack("3d");
+    await ensure3D();
+  } else {
+    teardown3D();
+    setTrack("letter");
+  }
+}
+
+setupNavActive();
+applyTrack();
+
+window.matchMedia(DESKTOP_MQ).addEventListener("change", applyTrack);
+window.matchMedia(REDUCE_MQ).addEventListener("change", applyTrack);
