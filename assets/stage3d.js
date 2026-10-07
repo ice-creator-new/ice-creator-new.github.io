@@ -12,12 +12,12 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.m
 export const MODEL_URL = null;
 
 const CAMERA_KEYS = [
-  // p, position, lookAt
-  { p: 0.0, pos: [0, 0.35, 4.2], look: [0, 0, 0], emissive: 0.08 },
-  { p: 0.22, pos: [0.15, 0.2, 3.4], look: [0, 0.05, 0], emissive: 0.12 },
-  { p: 0.5, pos: [1.4, 0.55, 2.8], look: [0, 0.1, 0], emissive: 0.22 },
-  { p: 0.75, pos: [0.6, 1.4, 2.6], look: [0, 0, 0], emissive: 0.16 },
-  { p: 1.0, pos: [0.2, 0.5, 3.8], look: [0, 0, 0], emissive: 0.08 },
+  // Stronger orbit amplitude; About (≈0.75) stays frontal — avoids torus “cutaway”
+  { p: 0.0, pos: [0, 0.4, 4.6], look: [0, 0, 0], emissive: 0.08 },
+  { p: 0.22, pos: [-0.35, 0.15, 3.1], look: [0, 0.08, 0], emissive: 0.14 },
+  { p: 0.5, pos: [2.1, 0.65, 2.4], look: [0, 0.12, 0], emissive: 0.26 },
+  { p: 0.75, pos: [0.85, 0.75, 3.2], look: [0, 0.05, 0], emissive: 0.18 },
+  { p: 1.0, pos: [0.1, 0.45, 4.4], look: [0, 0, 0], emissive: 0.08 },
 ];
 
 function lerp(a, b, t) {
@@ -76,7 +76,8 @@ function buildPlaceholder(scene) {
     new THREE.TorusGeometry(0.85, 0.28, 32, 64),
     torusMat,
   );
-  torus.rotation.x = Math.PI * 0.35;
+  /* Milder tilt — less ellipsoid cutaway under About camera */
+  torus.rotation.x = Math.PI * 0.22;
   group.add(torus);
 
   const icoMat = new THREE.MeshStandardMaterial({
@@ -123,7 +124,7 @@ export async function mountStage({ canvas, stage, sectionIds }) {
   scene.fog = new THREE.Fog(0x0e1116, 6, 14);
 
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 40);
-  camera.position.set(0, 0.35, 4.2);
+  camera.position.set(0, 0.4, 4.6);
 
   const hemi = new THREE.HemisphereLight(0xb8c4d4, 0x0b0d10, 0.85);
   scene.add(hemi);

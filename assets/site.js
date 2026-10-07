@@ -5,6 +5,8 @@
 
 const DESKTOP_MQ = "(min-width: 1024px)";
 const REDUCE_MQ = "(prefers-reduced-motion: reduce)";
+/** Bump with index.html ?v= so dynamic import is cache-busted too */
+const ASSET_V = "20261007b";
 
 let stageHandle = null;
 let mounting = false;
@@ -55,11 +57,47 @@ function setupNavActive() {
   update();
 }
 
+/**
+ * Letter-track Hero: ensure ICE letter stagger (SPEC §4.1).
+ * CSS animates on data-track=letter; JS forces final state for reduce / 3d,
+ * and can re-trigger choreography when switching into letter track.
+ */
+function runLetterHero({ restart = false } = {}) {
+  const title = document.querySelector(".hero-title");
+  const lead = document.querySelector(".hero-lead");
+  if (!title) return;
+
+  const CHOREO_MS = 620 + 48 * 2 + 90 + 480;
+
+  const markLit = () => {
+    title.classList.add("is-lit");
+    if (lead) lead.classList.add("is-lit");
+  };
+
+  if (document.body.dataset.track !== "letter") {
+    markLit();
+    return;
+  }
+
+  if (window.matchMedia(REDUCE_MQ).matches) {
+    markLit();
+    return;
+  }
+
+  if (restart) {
+    title.classList.remove("is-lit");
+    if (lead) lead.classList.remove("is-lit");
+    void title.offsetWidth; // restart CSS @keyframes
+  }
+
+  window.setTimeout(markLit, CHOREO_MS + 80);
+}
+
 async function ensure3D() {
   if (stageHandle || mounting) return;
   mounting = true;
   try {
-    const mod = await import("./stage3d.js");
+    const mod = await import(`./stage3d.js?v=${ASSET_V}`);
     stageHandle = await mod.mountStage({
       canvas: document.getElementById("stage-canvas"),
       stage: document.getElementById("stage"),
@@ -74,6 +112,7 @@ async function ensure3D() {
       stage.dataset.mounted = "0";
     }
     stageHandle = null;
+    runLetterHero({ restart: true });
   } finally {
     mounting = false;
   }
@@ -91,13 +130,19 @@ function teardown3D() {
   }
 }
 
+let lastTrack = null;
+
 async function applyTrack() {
   if (canUse3D()) {
     setTrack("3d");
+    runLetterHero();
     await ensure3D();
+    lastTrack = "3d";
   } else {
     teardown3D();
     setTrack("letter");
+    runLetterHero({ restart: lastTrack === "3d" });
+    lastTrack = "letter";
   }
 }
 
