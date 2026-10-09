@@ -4,32 +4,33 @@ Personal homepage — GitHub Pages user site.
 
 **Live:** https://ice-creator-new.github.io
 
-## Architecture (2026-10 · Direction A)
+## Architecture (2026-10 · v3.1b-B)
 
-**Typography + letter choreography** — no 3D / Three.js / empty stage.
+**Portfolio + SVG wallpaper parallax** — cold steel / warm white palette. No 3D / Three.js / theme switcher / empty placeholder cards.
 
 | Layer | Behavior |
 | --- | --- |
-| L0 Hero | Oversized split `ICE` letter stagger (`prefers-reduced-motion` → static final state) |
-| L1 Sections | IntersectionObserver fade/slide on Featured / About / Contact |
-| L1.5 Trace | Optional thin SVG stroke under Featured (≥768; hidden when reduce) |
-| Layout | Single-column IA all breakpoints; ≥768 featured cards 3-across |
+| Wallpaper | Fixed 3-layer inline SVG (far / mid / near) + vignette; scroll parallax on desktop |
+| Motion | `prefers-reduced-motion` → static wallpaper; mobile drops near layer & halves k |
+| Reveal | Sections default visible (no-JS readable); JS + full motion fades in |
+| Work | One real link only — icesniper blog card with abstract texture face |
 
-- `assets/tokens.css` — design tokens (color, space, type, motion)
-- `assets/site.css` — layout & components
-- `assets/site.js` — nav highlight + scroll reveal + `data-motion`
+- `assets/tokens.css` — design tokens (palette B, space, type, parallax k)
+- `assets/site.css` — layout, wallpaper, components
+- `assets/site.js` — reveal + parallax
 
 Blog site (icesniper.vercel.app) is separate and untouched.
 
-Design source of truth: SPEC v2 typography package (`personal-site-gh-pages-spec-v2-typography`).
+Design source of truth: SPEC v3.1b-B (`personal-site-gh-pages-spec-v3.1b`).
 
 ## Edit
 
 | File | What to change |
 | --- | --- |
-| `index.html` | Copy, links, featured cards |
+| `index.html` | Copy, links, wallpaper SVG |
 | `assets/tokens.css` | Palette / spacing / motion |
 | `assets/site.css` | Layout & components |
+| `assets/site.js` | Reveal / parallax |
 
 ## Preview
 
@@ -38,6 +39,6 @@ npx --yes serve -l 4173 .
 # open http://localhost:4173
 ```
 
-Or open `index.html` directly (no CDN / no ES-module hard deps beyond `site.js`).
+Or open `index.html` directly (Google Fonts need network).
 
 GitHub Pages serves `main` from the repo root.

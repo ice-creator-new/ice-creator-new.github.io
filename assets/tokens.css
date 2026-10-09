@@ -1,123 +1,59 @@
 /**
- * Ice · GitHub Pages 个人主页 v2
- * Design tokens — 强排版 · 无 3D
- * 工程可直接 @import 或拷贝到站点 CSS。
- * 版本：2026-10-09 · 设计参赞
+ * ICE · GH Pages v3.1b-B — design tokens (locked)
+ * 冷青灰 + 暖白 · 无紫 · 2026-10-09
  */
-
 :root {
-  /* ——— Color: surfaces ——— */
-  --color-bg: #0b0d10;
-  --color-bg-elevated: #10141a;
-  --color-bg-soft: #161b22;
-  --color-surface: #1a1f27;
-  --color-surface-hover: #222833;
-  --color-glass: rgba(16, 20, 26, 0.78);
-  --color-glass-border: rgba(255, 255, 255, 0.09);
+  --font-display: "Archivo", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
+  --font-body: "Space Grotesk", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
 
-  /* ——— Color: text（略收紧对比，避免「灰雾」） ——— */
-  --color-text: #f0f2f5;
-  --color-text-secondary: #a8b0bd;
-  --color-text-muted: #7a8494;
-  --color-text-inverse: #0b0d10;
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --s6: 32px;
+  --s7: 48px;
+  --s8: 64px;
+  --s9: 80px;
+  --s10: 112px;
 
-  /* ——— Color: accent（冷青，短标签 / 焦点 / 描线） ——— */
-  --color-accent: #5eead4;
-  --color-accent-soft: rgba(94, 234, 212, 0.12);
-  --color-accent-border: rgba(94, 234, 212, 0.38);
-  --color-accent-dim: #2dd4bf;
+  --col: 40rem;
+  --pad-x: clamp(20px, 4vw, 48px);
+  --hero-min-h: min(72vh, 560px);
+  --nav-h: 56px;
+  --radius: 8px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur: 180ms;
+  --dur-slow: 280ms;
 
-  /* ——— Color: line / focus ——— */
-  --color-border: rgba(255, 255, 255, 0.09);
-  --color-border-strong: rgba(255, 255, 255, 0.18);
-  --color-focus-ring: #5eead4;
-  --color-danger: #f87171;
+  --para-far: 0.06;
+  --para-mid: 0.14;
+  --para-near: 0.24;
 
-  /* ——— Spacing scale (4-base) ——— */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-  --space-8: 64px;
-  --space-9: 80px;
-  --space-10: 112px;
+  /* B · 冷青灰 + 暖白 */
+  --bg: #0a0e12;
+  --bg-elev: rgba(14, 20, 26, 0.8);
+  --bg-soft: #121820;
+  --text: #f2efe8;
+  --text-dim: #8e979f;
+  --text-faint: #657078;
+  --line: rgba(242, 239, 232, 0.12);
+  --line-strong: rgba(242, 239, 232, 0.22);
+  --accent: #7eb0bc;
+  --accent-soft: rgba(126, 176, 188, 0.16);
+  --focus: #7eb0bc;
+  --nav-bg: rgba(10, 14, 18, 0.72);
 
-  /* ——— Layout（单栏信息流；桌面加宽，无双栏舞台） ——— */
-  --grid-max: 720px;           /* 正文阅读柱 */
-  --grid-max-wide: 960px;      /* 精选卡横排可用 */
-  --grid-gutter: 20px;
-  --grid-gutter-md: 28px;
-  --grid-gutter-lg: 40px;
-  --section-pad-y: 88px;
-  --section-pad-y-sm: 56px;
-  --hero-min-h: min(70vh, 640px);
-  --nav-height: 56px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-pill: 999px;
+  --wp-deep: #0f1c24;
+  --wp-a: #3d6f7e;
+  --wp-b: #1a3340;
+  --wp-c: #8eb8c4;
+  --wp-d: #5a9aa8;
+  --wp-e: #243842;
+  --wp-grid: rgba(242, 239, 232, 0.04);
 
-  /* ——— Typography ——— */
-  --font-sans: "Inter", "SF Pro Text", "PingFang SC", "Noto Sans SC",
-    system-ui, -apple-system, sans-serif;
-  --font-display: "Inter", "SF Pro Display", "PingFang SC", "Noto Sans SC",
-    system-ui, -apple-system, sans-serif;
-  --font-mono: "SF Mono", "JetBrains Mono", "Menlo", ui-monospace, monospace;
-
-  --text-xs: 0.75rem;     /* 12 */
-  --text-sm: 0.875rem;    /* 14 */
-  --text-base: 1rem;      /* 16 */
-  --text-md: 1.125rem;    /* 18 */
-  --text-lg: 1.25rem;     /* 20 */
-  --text-xl: 1.5rem;      /* 24 */
-  --text-2xl: 2rem;       /* 32 */
-  --text-3xl: 2.5rem;     /* 40 */
-  /* Hero 字母：更大、更密，避免「空舞台感」 */
-  --text-hero: clamp(4.5rem, 18vw, 9.5rem);
-  --text-section: clamp(1.75rem, 3.5vw, 2.25rem);
-
-  --leading-tight: 0.92;
-  --leading-snug: 1.25;
-  --leading-normal: 1.6;
-  --tracking-tight: -0.04em;
-  --tracking-hero: -0.055em;
-  --tracking-wide: 0.12em;
-  --tracking-eyebrow: 0.14em;
-
-  /* ——— Motion ——— */
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
-  --dur-fast: 160ms;
-  --dur-base: 280ms;
-  --dur-slow: 480ms;
-  --dur-hero-letter: 700ms;
-  --stagger-letter: 70ms;
-  --stagger-line: 100ms;
-  --stagger-card: 80ms;
-
-  /* ——— Breakpoints（文档用；CSS 用媒体查询） ——— */
-  /* sm: 640 · md: 768 · lg: 1024 · xl: 1280 */
-  /* 全断点同一单栏 IA；≥768 精选可三卡横排；≥1024 加宽 gutter */
-}
-
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --dur-fast: 0ms;
-    --dur-base: 0ms;
-    --dur-slow: 0ms;
-    --dur-hero-letter: 0ms;
-    --stagger-letter: 0ms;
-    --stagger-line: 0ms;
-    --stagger-card: 0ms;
-  }
-}
-
-@media (max-width: 639px) {
-  :root {
-    --grid-gutter: 16px;
-    --section-pad-y: var(--section-pad-y-sm);
-  }
+  --vignette-mid: rgba(10, 14, 18, 0.4);
+  --vignette-edge: rgba(10, 14, 18, 0.88);
+  --vignette-top: rgba(10, 14, 18, 0.2);
+  --vignette-bottom: rgba(10, 14, 18, 0.6);
 }
