@@ -1,6 +1,6 @@
 /**
- * ICE · GH Pages v3.1b-B — design tokens (locked)
- * 冷青灰 + 暖白 · 无紫 · 2026-10-09
+ * ICE · GH Pages v3.2 dense — design tokens
+ * 冷青灰 + 暖白 · 无紫 · glass nav · 2026-10-09
  */
 :root {
   --font-display: "Archivo", "PingFang SC", "Noto Sans SC", system-ui, sans-serif;
@@ -56,4 +56,14 @@
   --vignette-edge: rgba(10, 14, 18, 0.88);
   --vignette-top: rgba(10, 14, 18, 0.2);
   --vignette-bottom: rgba(10, 14, 18, 0.6);
+
+  /* v3.2 density + glass */
+  --glass-bg: rgba(10, 14, 18, 0.55);
+  --glass-bg-scroll: rgba(10, 14, 18, 0.72);
+  --glass-blur: 18px;
+  --glass-saturate: 1.35;
+  --glass-border: rgba(242, 239, 232, 0.14);
+  --tag-bg: rgba(126, 176, 188, 0.1);
+  --tag-border: rgba(126, 176, 188, 0.28);
+  --card-min-h: 220px;
 }
