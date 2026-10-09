@@ -1,11 +1,19 @@
 /**
- * ICE · GH Pages v3.1b-B — reveal + wallpaper parallax
+ * ICE · GH Pages v3.2 dense — reveal + wallpaper parallax + nav glass scroll
  */
 document.documentElement.classList.add("js");
 
 const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 const mobile = window.matchMedia("(max-width: 767px)").matches;
 document.body.dataset.motion = reduce ? "reduce" : "full";
+
+const nav = document.querySelector(".nav");
+const onScrollNav = () => {
+  if (!nav) return;
+  nav.classList.toggle("is-scrolled", (window.scrollY || 0) > 8);
+};
+window.addEventListener("scroll", onScrollNav, { passive: true });
+onScrollNav();
 
 // Section reveal — only when JS + full motion; default CSS keeps content visible
 if (!reduce) {
@@ -18,7 +26,7 @@ if (!reduce) {
         }
       }
     },
-    { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+    { threshold: 0.14, rootMargin: "0px 0px -8% 0px" }
   );
   document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
 }

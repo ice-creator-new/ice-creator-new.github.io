@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ICE — 独立开发者</title>
-    <meta name="description" content="ICE — 独立开发者。界面、工具，以及安静的系统。" />
+    <title>ICE — 客户端工程师</title>
+    <meta name="description" content="Ice — 客户端工程师（iOS / React Native）。用 AI 造界面、工具与安静的系统。" />
     <meta name="theme-color" content="#0a0e12" />
-    <meta property="og:title" content="ICE — 独立开发者" />
-    <meta property="og:description" content="ICE — 独立开发者。界面、工具，以及安静的系统。" />
+    <meta property="og:title" content="ICE — 客户端工程师" />
+    <meta property="og:description" content="Ice — 客户端工程师（iOS / React Native）。用 AI 造界面、工具与安静的系统。" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ice-creator-new.github.io/" />
     <meta property="og:image" content="https://ice-creator-new.github.io/og.jpg" />
@@ -19,8 +19,8 @@
       href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assets/tokens.css?v=20261009e" />
-    <link rel="stylesheet" href="./assets/site.css?v=20261009e" />
+    <link rel="stylesheet" href="./assets/tokens.css?v=20261009f" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261009f" />
   </head>
   <body>
     <!-- Mac-like abstract SVG wallpaper · B palette (cold steel / warm white, no purple) -->
@@ -88,6 +88,7 @@
         <a class="nav-brand" href="#hero">ICE</a>
         <ul class="nav-links">
           <li><a href="#work">Work</a></li>
+          <li><a href="#stack">Stack</a></li>
           <li><a href="#about">About</a></li>
           <li><a href="#contact">Contact</a></li>
           <li>
@@ -98,60 +99,107 @@
 
       <main class="shell">
         <section id="hero">
-          <p class="hero-role">Independent developer</p>
+          <p class="hero-role">Client engineer · AI-assisted</p>
           <h1 class="hero-mark">ICE</h1>
-          <p class="hero-lead">界面、工具，以及安静的系统。</p>
+          <p class="hero-lead">客户端工程师。用 AI 造 iOS / React Native 界面与个人工具。</p>
+          <div class="tag-row" aria-label="能力">
+            <span class="tag">iOS / Swift</span>
+            <span class="tag">React Native</span>
+            <span class="tag">AI 工作流落地</span>
+            <span class="tag">个人工具</span>
+          </div>
         </section>
 
-        <section id="work">
+        <section id="work" class="block">
           <p class="section-label">Selected</p>
           <h2 class="section-title">工作与写作</h2>
-          <div class="work-strip work-strip--solo">
-            <a
-              class="work-card reveal"
-              href="https://icesniper.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <div class="work-visual" aria-hidden="true"></div>
+          <p class="section-lead">只放真链。截图有货再补画面，不占假卡。</p>
+          <div class="work-grid">
+            <a class="work-card work-card--feature reveal" href="https://icesniper.vercel.app" target="_blank" rel="noopener noreferrer">
+              <div class="work-visual work-visual--blog" aria-hidden="true"></div>
               <div class="work-meta">
-                <span>Writing · 2026</span>
+                <span class="stack">Writing · Astro</span>
                 <h3>icesniper 博客</h3>
-                <p>项目笔记、技术对照与日常想法。</p>
+                <p>项目笔记、技术对照与日常想法——公开的工作日志。</p>
+              </div>
+            </a>
+            <a class="work-card reveal" href="https://github.com/ice-creator-new/Pulse" target="_blank" rel="noopener noreferrer">
+              <div class="work-visual work-visual--pulse" aria-hidden="true"></div>
+              <div class="work-meta">
+                <span class="stack">Swift · macOS</span>
+                <h3>Pulse</h3>
+                <p>盯 Claude Code / Codex 等 AI 编码额度与限速的屏幕边缘浮层。</p>
+              </div>
+            </a>
+            <a class="work-card reveal" href="https://github.com/ice-creator-new/awesome-time" target="_blank" rel="noopener noreferrer">
+              <div class="work-visual work-visual--time" aria-hidden="true"></div>
+              <div class="work-meta">
+                <span class="stack">Dart · 跨端</span>
+                <h3>awesome-time</h3>
+                <p>电脑正在播的歌镜像到手机：封面、进度、控制与横屏实时频谱。</p>
               </div>
             </a>
           </div>
-          <p class="work-note">精选只放真链。Field Notes / Signal 有货再加，不占位。</p>
         </section>
 
-        <section id="about" class="reveal">
-          <p class="section-label">About</p>
-          <h2 class="section-title">Ice · 独立开发</h2>
-          <div class="about-body">
-            <p>我是 Ice，独立开发者与设计师。做界面、工具，以及安静的系统。</p>
-            <p>
-              写作与项目笔记在博客：
-              <a href="https://icesniper.vercel.app" target="_blank" rel="noopener noreferrer">icesniper.vercel.app</a>。
-            </p>
+        <section id="stack" class="block reveal">
+          <p class="section-label">Workbench</p>
+          <h2 class="section-title">正在怎么干活</h2>
+          <p class="section-lead">公开工作台，不是广告墙。过期了再改这几条。</p>
+          <div class="tools-grid">
+            <div class="tool-card">
+              <h3>Cursor</h3>
+              <p>日常写码与改稿主场；Agent / 多 Bot 协作拆任务。</p>
+            </div>
+            <div class="tool-card">
+              <h3>AI 编码助手</h3>
+              <p>Claude Code、Codex 等轮换；额度用 Pulse 盯着。</p>
+            </div>
+            <div class="tool-card">
+              <h3>Swift / Xcode</h3>
+              <p>macOS / iOS 原生：Pulse 等边缘工具走这条。</p>
+            </div>
+            <div class="tool-card">
+              <h3>React Native / Expo</h3>
+              <p>客户端业务与跨端实验；有数等产品线。</p>
+            </div>
+            <div class="tool-card">
+              <h3>GitHub</h3>
+              <p>开源与个人项目主仓；PR 驱动交付。</p>
+            </div>
+            <div class="tool-card">
+              <h3>Astro / Vercel</h3>
+              <p>博客与静态页发布；情报直发也走这条管线。</p>
+            </div>
           </div>
         </section>
 
-        <section id="contact" class="reveal">
+        <section id="about" class="block reveal">
+          <p class="section-label">About</p>
+          <h2 class="section-title">Ice · 客户端工程师</h2>
+          <div class="about-body">
+            <p>我是 Ice，做客户端：iOS / Swift 与 React Native。最近大量时间用 AI 加速造工具、界面和安静的系统，而不是只写页面。</p>
+            <p>白天钻进额度、桥接与交互细节；晚上把踩坑写成博客。想看代码去 GitHub，想看思路去博客。</p>
+          </div>
+        </section>
+
+        <section id="contact" class="block reveal">
           <p class="section-label">Contact</p>
           <h2 class="section-title">保持联系</h2>
           <div class="contact-links">
             <a class="pill" href="https://icesniper.vercel.app" target="_blank" rel="noopener noreferrer">博客</a>
             <a class="pill" href="https://github.com/ice-creator-new" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a class="pill" href="https://github.com/ice-creator-new/Pulse" target="_blank" rel="noopener noreferrer">Pulse</a>
           </div>
         </section>
       </main>
 
       <footer>
         <span>ICE</span>
-        <span>© 2026 · quiet systems</span>
+        <span>© 2026 · client + AI</span>
       </footer>
     </div>
 
-    <script src="./assets/site.js?v=20261009e" defer></script>
+    <script src="./assets/site.js?v=20261009f" defer></script>
   </body>
 </html>
