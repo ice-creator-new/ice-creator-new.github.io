@@ -1,38 +1,16 @@
 /**
  * Ice · GH Pages entry
- * Dual-track: desktop 3D (lazy Three) vs letter choreography.
+ * Direction A: typography + letter choreography · no 3D
  */
 
-const DESKTOP_MQ = "(min-width: 1024px)";
 const REDUCE_MQ = "(prefers-reduced-motion: reduce)";
-/** Bump with index.html ?v= so dynamic import is cache-busted too */
-const ASSET_V = "20261007b";
 
-let stageHandle = null;
-let mounting = false;
-
-function hasWebGL() {
-  try {
-    const canvas = document.createElement("canvas");
-    return !!(
-      canvas.getContext("webgl") ||
-      canvas.getContext("experimental-webgl")
-    );
-  } catch {
-    return false;
-  }
+function prefersReduce() {
+  return window.matchMedia(REDUCE_MQ).matches;
 }
 
-function canUse3D() {
-  return (
-    window.matchMedia(DESKTOP_MQ).matches &&
-    !window.matchMedia(REDUCE_MQ).matches &&
-    hasWebGL()
-  );
-}
-
-function setTrack(track) {
-  document.body.dataset.track = track;
+function setMotionAttr() {
+  document.body.dataset.motion = prefersReduce() ? "reduce" : "full";
 }
 
 function setupNavActive() {
@@ -57,97 +35,41 @@ function setupNavActive() {
   update();
 }
 
-/**
- * Letter-track Hero: ensure ICE letter stagger (SPEC §4.1).
- * CSS animates on data-track=letter; JS forces final state for reduce / 3d,
- * and can re-trigger choreography when switching into letter track.
- */
-function runLetterHero({ restart = false } = {}) {
-  const title = document.querySelector(".hero-title");
-  const lead = document.querySelector(".hero-lead");
-  if (!title) return;
+/** L1 — IntersectionObserver scroll reveal (§4.2) */
+function setupReveal() {
+  const nodes = [...document.querySelectorAll(".reveal")];
+  if (!nodes.length) return;
 
-  const CHOREO_MS = 620 + 48 * 2 + 90 + 480;
-
-  const markLit = () => {
-    title.classList.add("is-lit");
-    if (lead) lead.classList.add("is-lit");
-  };
-
-  if (document.body.dataset.track !== "letter") {
-    markLit();
+  if (prefersReduce()) {
+    for (const el of nodes) el.classList.add("is-in");
+    const featured = document.getElementById("featured");
+    if (featured) featured.classList.add("is-in");
     return;
   }
 
-  if (window.matchMedia(REDUCE_MQ).matches) {
-    markLit();
-    return;
-  }
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const entry of entries) {
+        if (!entry.isIntersecting) continue;
+        entry.target.classList.add("is-in");
+        io.unobserve(entry.target);
+      }
+    },
+    { threshold: 0.15 }
+  );
 
-  if (restart) {
-    title.classList.remove("is-lit");
-    if (lead) lead.classList.remove("is-lit");
-    void title.offsetWidth; // restart CSS @keyframes
-  }
-
-  window.setTimeout(markLit, CHOREO_MS + 80);
+  for (const el of nodes) io.observe(el);
 }
 
-async function ensure3D() {
-  if (stageHandle || mounting) return;
-  mounting = true;
-  try {
-    const mod = await import(`./stage3d.js?v=${ASSET_V}`);
-    stageHandle = await mod.mountStage({
-      canvas: document.getElementById("stage-canvas"),
-      stage: document.getElementById("stage"),
-      sectionIds: ["hero", "featured", "about", "contact"],
-    });
-  } catch (err) {
-    console.warn("[ice] 3D stage failed, falling back to letter track", err);
-    setTrack("letter");
-    const stage = document.getElementById("stage");
-    if (stage) {
-      stage.classList.remove("is-ready");
-      stage.dataset.mounted = "0";
-    }
-    stageHandle = null;
-    runLetterHero({ restart: true });
-  } finally {
-    mounting = false;
-  }
-}
-
-function teardown3D() {
-  if (stageHandle?.teardown) {
-    stageHandle.teardown();
-  }
-  stageHandle = null;
-  const stage = document.getElementById("stage");
-  if (stage) {
-    stage.classList.remove("is-ready");
-    stage.dataset.mounted = "0";
-  }
-}
-
-let lastTrack = null;
-
-async function applyTrack() {
-  if (canUse3D()) {
-    setTrack("3d");
-    runLetterHero();
-    await ensure3D();
-    lastTrack = "3d";
-  } else {
-    teardown3D();
-    setTrack("letter");
-    runLetterHero({ restart: lastTrack === "3d" });
-    lastTrack = "letter";
-  }
-}
-
+setMotionAttr();
 setupNavActive();
-applyTrack();
+setupReveal();
 
-window.matchMedia(DESKTOP_MQ).addEventListener("change", applyTrack);
-window.matchMedia(REDUCE_MQ).addEventListener("change", applyTrack);
+window.matchMedia(REDUCE_MQ).addEventListener("change", () => {
+  setMotionAttr();
+  if (prefersReduce()) {
+    for (const el of document.querySelectorAll(".reveal")) {
+      el.classList.add("is-in");
+    }
+  }
+});
