@@ -147,10 +147,10 @@ section + section {
   min-height: var(--hero-min-h);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  /* Visual center of letters ~42% viewport; content starts after nav */
-  padding-top: max(calc(var(--nav-height) + var(--space-6)), calc(42vh - 3.5rem));
-  padding-bottom: var(--space-8);
+  justify-content: center;
+  /* Shorter hero: letters ~40–45% viewport; featured peeks on 1280×900 */
+  padding-top: calc(var(--nav-height) + var(--space-4));
+  padding-bottom: var(--space-6);
   border-top: none;
 }
 .hero-title {
@@ -226,6 +226,7 @@ section + section {
   stroke-dashoffset: 320;
 }
 #featured.is-in .trace path,
+.featured-wrap:has(.reveal.is-in) .trace path,
 .trace.is-drawn path {
   animation: drawLine 800ms var(--ease-out) forwards;
 }
@@ -350,10 +351,16 @@ a.card.is-primary:hover {
   padding: 4px 10px;
 }
 
-/* L1 scroll reveal */
+/* L1 scroll reveal — default visible (no-JS readable); hide only after JS marks html.js + full motion */
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+html.js body[data-motion="full"] .reveal:not(.is-in) {
   opacity: 0;
   transform: translateY(16px);
+}
+html.js body[data-motion="full"] .reveal {
   transition:
     opacity var(--dur-slow) var(--ease-out),
     transform var(--dur-slow) var(--ease-out);

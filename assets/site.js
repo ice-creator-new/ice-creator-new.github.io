@@ -35,6 +35,11 @@ function setupNavActive() {
   update();
 }
 
+function inViewport(el) {
+  const r = el.getBoundingClientRect();
+  return r.bottom > 0 && r.top < window.innerHeight * 0.92;
+}
+
 /** L1 — IntersectionObserver scroll reveal (§4.2) */
 function setupReveal() {
   const nodes = [...document.querySelectorAll(".reveal")];
@@ -47,6 +52,14 @@ function setupReveal() {
     return;
   }
 
+  // Mark already-visible nodes before enabling hide cascade (avoids FOUC)
+  for (const el of nodes) {
+    if (inViewport(el)) el.classList.add("is-in");
+  }
+
+  const pending = nodes.filter((el) => !el.classList.contains("is-in"));
+  if (!pending.length) return;
+
   const io = new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
@@ -58,12 +71,14 @@ function setupReveal() {
     { threshold: 0.15 }
   );
 
-  for (const el of nodes) io.observe(el);
+  for (const el of pending) io.observe(el);
 }
 
 setMotionAttr();
-setupNavActive();
 setupReveal();
+// Enable progressive-enhancement hide only after in-view nodes are marked
+document.documentElement.classList.add("js");
+setupNavActive();
 
 window.matchMedia(REDUCE_MQ).addEventListener("change", () => {
   setMotionAttr();
