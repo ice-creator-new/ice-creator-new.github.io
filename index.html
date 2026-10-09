@@ -3,105 +3,129 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>ICE</title>
-    <meta name="description" content="ICE — 独立开发者。正在建造界面、工具，以及安静的系统。" />
-    <meta name="theme-color" content="#0b0d10" />
-    <meta property="og:title" content="ICE" />
-    <meta property="og:description" content="ICE — 独立开发者。正在建造界面、工具，以及安静的系统。" />
+    <title>ICE — 独立开发者</title>
+    <meta name="description" content="ICE — 独立开发者。界面、工具，以及安静的系统。" />
+    <meta name="theme-color" content="#0a0e12" />
+    <meta property="og:title" content="ICE — 独立开发者" />
+    <meta property="og:description" content="ICE — 独立开发者。界面、工具，以及安静的系统。" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://ice-creator-new.github.io/" />
     <meta property="og:image" content="https://ice-creator-new.github.io/og.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
-    <link rel="stylesheet" href="./assets/tokens.css?v=20261009b" />
-    <link rel="stylesheet" href="./assets/site.css?v=20261009b" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Space+Grotesk:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./assets/tokens.css?v=20261009e" />
+    <link rel="stylesheet" href="./assets/site.css?v=20261009e" />
   </head>
   <body>
-    <nav class="nav" id="nav" aria-label="主导航">
-      <a class="nav-brand" href="#hero">ICE</a>
-      <ul class="nav-links">
-        <li><a href="#featured">精选</a></li>
-        <li><a href="#about">关于</a></li>
-        <li><a href="#contact">联系</a></li>
-        <li>
-          <a
-            class="nav-icon"
-            href="https://github.com/ice-creator-new"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="GitHub"
-          >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
-              <path d="M9 19c-4.3 1.4-4.3-2.1-6-2.5M15 22v-3.9a3.4 3.4 0 0 0-1-2.6c3.2-.4 6.6-1.6 6.6-7a5.4 5.4 0 0 0-1.5-3.8 5 5 0 0 0-.1-3.8s-1.2-.4-3.9 1.5a13.4 13.4 0 0 0-7 0C5.2 1.9 4 2.3 4 2.3a5 5 0 0 0-.1 3.8A5.4 5.4 0 0 0 2.4 9.9c0 5.4 3.4 6.6 6.6 7a3.4 3.4 0 0 0-1 2.6V22" />
-            </svg>
-          </a>
-        </li>
-      </ul>
-    </nav>
-
-    <main>
-      <div class="col">
-        <section id="hero">
-          <p class="eyebrow hero-eyebrow">01 — 开场</p>
-          <h1 class="hero-title" aria-label="ICE">
-            <span class="ch">I</span><span class="ch">C</span><span class="ch">E</span>
-          </h1>
-          <p class="hero-lead">
-            独立开发者。正在建造界面、工具，以及安静的系统。
-          </p>
-        </section>
+    <!-- Mac-like abstract SVG wallpaper · B palette (cold steel / warm white, no purple) -->
+    <div class="wallpaper" aria-hidden="true">
+      <div class="wp-layer wp-far" data-speed="far">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="blurFar" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="48" />
+            </filter>
+            <linearGradient id="gDeep" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="var(--wp-deep)" />
+              <stop offset="100%" stop-color="var(--bg)" />
+            </linearGradient>
+          </defs>
+          <rect width="1200" height="800" fill="url(#gDeep)" />
+          <g filter="url(#blurFar)" opacity="0.9">
+            <ellipse cx="220" cy="180" rx="340" ry="260" fill="var(--wp-a)" opacity="0.55" />
+            <ellipse cx="980" cy="120" rx="280" ry="220" fill="var(--wp-e)" opacity="0.7" />
+            <ellipse cx="700" cy="620" rx="420" ry="280" fill="var(--wp-b)" opacity="0.45" />
+          </g>
+          <g stroke="var(--wp-grid)" stroke-width="1" fill="none">
+            <path d="M0 160 H1200 M0 320 H1200 M0 480 H1200 M0 640 H1200" />
+            <path d="M200 0 V800 M400 0 V800 M600 0 V800 M800 0 V800 M1000 0 V800" />
+          </g>
+        </svg>
       </div>
+      <div class="wp-layer wp-mid" data-speed="mid">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="blurMid" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="36" />
+            </filter>
+          </defs>
+          <g filter="url(#blurMid)">
+            <ellipse cx="960" cy="280" rx="220" ry="200" fill="var(--wp-c)" opacity="0.42" />
+            <ellipse cx="180" cy="520" rx="260" ry="200" fill="var(--wp-d)" opacity="0.34" />
+            <ellipse cx="560" cy="200" rx="180" ry="140" fill="var(--wp-a)" opacity="0.26" />
+          </g>
+        </svg>
+      </div>
+      <div class="wp-layer wp-near" data-speed="near">
+        <svg viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="blurNear" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="28" />
+            </filter>
+            <filter id="grain">
+              <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
+              <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.04 0" />
+            </filter>
+          </defs>
+          <g filter="url(#blurNear)">
+            <ellipse cx="820" cy="540" rx="140" ry="110" fill="var(--wp-d)" opacity="0.38" />
+            <ellipse cx="340" cy="140" rx="120" ry="90" fill="var(--wp-c)" opacity="0.2" />
+          </g>
+          <rect width="1200" height="800" filter="url(#grain)" opacity="0.5" />
+        </svg>
+      </div>
+      <div class="wp-vignette"></div>
+    </div>
 
-      <div class="featured-wrap">
-        <section id="featured">
-          <div class="featured-head">
-            <p class="eyebrow">02 — 精选</p>
-            <h2 class="section-title">精选</h2>
-            <p class="section-desc">博客已上线；其余条目会随项目更新。</p>
-            <svg class="trace" viewBox="0 0 720 28" aria-hidden="true">
-              <path d="M0 20 C 80 20, 100 8, 180 8 S 280 22, 360 14 S 480 6, 540 16 S 640 22, 720 10" />
-            </svg>
-          </div>
-          <div class="cards">
+    <div class="page">
+      <nav class="nav" aria-label="主导航">
+        <a class="nav-brand" href="#hero">ICE</a>
+        <ul class="nav-links">
+          <li><a href="#work">Work</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li>
+            <a href="https://github.com/ice-creator-new" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </li>
+        </ul>
+      </nav>
+
+      <main class="shell">
+        <section id="hero">
+          <p class="hero-role">Independent developer</p>
+          <h1 class="hero-mark">ICE</h1>
+          <p class="hero-lead">界面、工具，以及安静的系统。</p>
+        </section>
+
+        <section id="work">
+          <p class="section-label">Selected</p>
+          <h2 class="section-title">工作与写作</h2>
+          <div class="work-strip work-strip--solo">
             <a
-              class="card is-primary reveal"
+              class="work-card reveal"
               href="https://icesniper.vercel.app"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <div class="card-meta">
-                <span>01 / 2026</span>
-                <span class="card-tag">写作</span>
+              <div class="work-visual" aria-hidden="true"></div>
+              <div class="work-meta">
+                <span>Writing · 2026</span>
+                <h3>icesniper 博客</h3>
+                <p>项目笔记、技术对照与日常想法。</p>
               </div>
-              <h3>icesniper 博客</h3>
-              <p>项目笔记、技术对照与日常想法。点击进入博客。</p>
-              <span class="card-arrow" aria-hidden="true">→</span>
             </a>
-            <div class="card is-soon reveal" role="group" aria-label="Field Notes，即将">
-              <div class="card-meta">
-                <span>02 / 2026</span>
-                <span class="card-tag">随记</span>
-              </div>
-              <h3>Field Notes</h3>
-              <p>还在生长的随记与草稿。</p>
-              <span class="card-soon-badge">即将</span>
-            </div>
-            <div class="card is-soon reveal" role="group" aria-label="Signal，即将">
-              <div class="card-meta">
-                <span>03 / 2026</span>
-                <span class="card-tag">实验</span>
-              </div>
-              <h3>Signal</h3>
-              <p>界面与系统上的小实验。</p>
-              <span class="card-soon-badge">即将</span>
-            </div>
           </div>
+          <p class="work-note">精选只放真链。Field Notes / Signal 有货再加，不占位。</p>
         </section>
-      </div>
 
-      <div class="col">
         <section id="about" class="reveal">
-          <p class="eyebrow">04 — 关于</p>
+          <p class="section-label">About</p>
           <h2 class="section-title">Ice · 独立开发</h2>
           <div class="about-body">
             <p>我是 Ice，独立开发者与设计师。做界面、工具，以及安静的系统。</p>
@@ -113,22 +137,21 @@
         </section>
 
         <section id="contact" class="reveal">
-          <p class="eyebrow">05 — 联系</p>
+          <p class="section-label">Contact</p>
           <h2 class="section-title">保持联系</h2>
-          <p class="section-desc">博客、GitHub，以及之后的联系方式都会放在这里。</p>
           <div class="contact-links">
             <a class="pill" href="https://icesniper.vercel.app" target="_blank" rel="noopener noreferrer">博客</a>
             <a class="pill" href="https://github.com/ice-creator-new" target="_blank" rel="noopener noreferrer">GitHub</a>
           </div>
         </section>
-      </div>
-    </main>
+      </main>
 
-    <footer>
-      <span>ICE</span>
-      <span>© 2026 · quiet systems</span>
-    </footer>
+      <footer>
+        <span>ICE</span>
+        <span>© 2026 · quiet systems</span>
+      </footer>
+    </div>
 
-    <script type="module" src="./assets/site.js?v=20261009b"></script>
+    <script src="./assets/site.js?v=20261009e" defer></script>
   </body>
 </html>
